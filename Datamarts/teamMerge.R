@@ -1,0 +1,45 @@
+teamMerge<-function(sData){
+    
+      awayData<-subset(sData,sData$HomeAway=="Away")
+      awayTeam<-rename(awayData,c("team"="AwayTeam",
+                                  "cumPoints"="aCumPoints",
+                                  "cumPointsBefore"="aCumPointsBefore",
+                                  "mGoals"="aGoals",
+                                  "mGoalsConceded"="aGoalsConceded",
+                                  "mShots"="aShots",
+                                  "mShotsConceded"="aShotsConceded",
+                                  "mShotsOnTarget"="aShotsOnTarget",
+                                  "mShotsOnTargetConceded"="aShotsOnTargetConceded",
+                                  "mCorners"="aCorners",
+                                  "mCornersConceded"="aCornersConceded",
+                                  "mFouls"="aFouls",
+                                  "mYellows"="aYellows",
+                                  "mReds"="aReds",
+                                  "mPoints"="aPoints",
+                                  "mDP"="aDP",
+                                  "standing"="aStanding"))
+      awayTeam<-awayTeam[,-5]
+      
+      homeTeam<-subset(sData,sData$HomeAway=="Home")
+      homeTeam<-rename(homeTeam,c("team"="HomeTeam",
+                                  "cumPoints"="hCumPoints",
+                                  "cumPointsBefore"="hCumPointsBefore",
+                                  "mGoals"="hGoals",
+                                  "mGoalsConceded"="hGoalsConceded",
+                                  "mShots"="hShots",
+                                  "mShotsConceded"="hShotsConceded",
+                                  "mShotsOnTarget"="hShotsOnTarget",
+                                  "mShotsOnTargetConceded"="hShotsOnTargetConceded",
+                                  "mCorners"="hCorners",
+                                  "mCornersConceded"="hCornersConceded",
+                                  "mFouls"="hFouls",
+                                  "mYellows"="hYellows",
+                                  "mReds"="hReds",
+                                  "mPoints"="hPoints",
+                                  "mDP"="hDP",
+                                  "standing"="hStanding"))
+      homeTeam<-homeTeam[,-5]
+      
+      dataMerged<-merge(awayTeam,homeTeam,by=c("X","Date","season"))
+      return(dataMerged)
+}
